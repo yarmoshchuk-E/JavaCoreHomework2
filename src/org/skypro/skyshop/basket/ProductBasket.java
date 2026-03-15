@@ -48,9 +48,13 @@ public class ProductBasket {
       <имя продукта>: <стоимость>
      Итого: <общая стоимость корзины> */
     public void printBasket() {
+        int countSpecial = 0;
         for (Product element : basket) {
             if (element != null) {
                 System.out.println(element);
+                if (element.isSpecial()) {
+                    countSpecial++;
+                }
             }
             if (getTotalBasket() == 0) {
                 System.out.println("В корзине пусто.");
@@ -59,23 +63,24 @@ public class ProductBasket {
         }
         int total = getTotalBasket();
         System.out.println("Итого: " + "< " + total + " >");
+        System.out.println("Специальных товаров: " + "< " + countSpecial + " >");
     }
 
     /*Метод, проверяющий продукт в корзине по имени: метод принимает в себя строку имени и возвращает
         boolean в зависимости от того, есть продукт в корзине или его нет.*/
     public boolean checkingTheContent(String productName) {
-       for (Product element : basket) {
-           if (element == null || productName == null || element.getProductName() == null) {
-               continue;
-           }
-           //приведение к нижнему регистру и замена пробелов
-           productName = productName.toLowerCase();
-           productName = productName.replace(" ", "");
-           if (productName.equals(element.getProductName())) {
-               System.out.println("товар есть в корзине");
-               return true;
-           }
-       }
+        for (Product element : basket) {
+            if (element == null || productName == null || element.getProductName() == null) {
+                continue;
+            }
+            //приведение к нижнему регистру и замена пробелов
+            productName = productName.toLowerCase();
+            productName = productName.replace(" ", "");
+            if (productName.equals(element.getProductName())) {
+                System.out.println("товар есть в корзине");
+                return true;
+            }
+        }
         System.out.println("товара нет в корзине");
         return false;
     }

@@ -1,7 +1,10 @@
 package org.skypro.skyshop;
 
 import org.skypro.skyshop.basket.ProductBasket;
+import org.skypro.skyshop.product.DiscountedProduct;
+import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
+import org.skypro.skyshop.product.SimpleProduct;
 
 import java.util.Arrays;
 
@@ -12,12 +15,12 @@ public class App {
         ProductBasket basket1 = new ProductBasket();
 
         //создаю продукты.
-        Product product1 = new Product("молоко", 100);
-        Product product2 = new Product("хлеб", 40);
-        Product product3 = new Product("мясо", 600);
-        Product product4 = new Product("сыр", 250);
-        Product product5 = new Product("конфеты", 450);
-        Product product6 = new Product("чай", 150);
+        Product product1 = new SimpleProduct("молоко", 100);
+        Product product2 = new SimpleProduct("хлеб", 40);
+        Product product3 = new FixPriceProduct("зефир");
+        Product product4 = new DiscountedProduct("сыр", 400, 20);
+        Product product5 = new SimpleProduct("конфеты", 450);
+        Product product6 = new SimpleProduct("чай", 150);
 
         //Добавление продукта в корзину.
         basket1.addToBasket(product1);
