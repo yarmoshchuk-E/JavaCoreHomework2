@@ -1,10 +1,8 @@
-package org.skypro.skyshop;
-
-import org.skypro.skyshop.product.Product;
+package org.skypro.skyshop.product;
 
 public class DiscountedProduct extends Product {
-    int basePrice;
-    int percentageDiscount;
+    private int basePrice;
+    private int percentageDiscount;
 
     public DiscountedProduct(String productName, int basePrice, int percentageDiscount) {
         super(productName);
