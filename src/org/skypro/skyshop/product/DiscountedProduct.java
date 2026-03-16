@@ -29,4 +29,14 @@ public class DiscountedProduct extends Product {
     public String toString() {
         return "<" + getProductName() + ": " + getProductPrice() + ">" + "(" + "<" + percentageDiscount + ">" + "%)";
     }
+
+    @Override
+    public String getSearchTerm() {
+        return getProductName();
+    }
+
+    @Override
+    public String getTypeOfContent() {
+        return "PRODUCT";
+    }
 }

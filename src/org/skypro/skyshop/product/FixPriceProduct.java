@@ -26,4 +26,13 @@ public class FixPriceProduct extends Product {
     public String toString() {
         return "<" + getProductName() + ": " + getProductPrice() + ">" + "<" + FIX_PRICE + ">";
     }
+    @Override
+    public String getSearchTerm() {
+        return getProductName();
+    }
+
+    @Override
+    public String getTypeOfContent() {
+        return "PRODUCT";
+    }
 }

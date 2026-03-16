@@ -28,4 +28,13 @@ public class SimpleProduct extends Product {
     public String toString() {
         return super.toString();
     }
+    @Override
+    public String getSearchTerm() {
+        return getProductName();
+    }
+
+    @Override
+    public String getTypeOfContent() {
+        return "PRODUCT";
+    }
 }
