@@ -7,8 +7,8 @@ import java.util.Arrays;
 public class SearchEngine {
     private Searchable[] elements;
 
-    public SearchEngine() {
-        this.elements = new Searchable[10];
+    public SearchEngine(int size) {
+        this.elements = new Searchable[size];
     }
 
     public Searchable[] getElements() {
@@ -30,10 +30,9 @@ public class SearchEngine {
                 result[count] = elements[i];
                 System.out.println(result[count]);
                 count++;
-                continue;
-            }
-                        if (count == result.length - 1) {
-                break;
+                if (count == result.length) {
+                    break;
+                }
             }
         }
         if (count == 0) {
@@ -44,23 +43,18 @@ public class SearchEngine {
     }
 
     public void addElements(Searchable searchable) {
-        int size = 0;
+        int count = 0;
         for (int i = 0; i < elements.length; i++) {
             if (elements[i] != null) {
-                size++;
+                count++;
             }
             if (elements[i] == null) {
                 elements[i] = searchable;
                 break;
             }
-            if (size == elements.length) {
-                System.out.println("Невозможно добавить объект");
+            if (count == elements.length) {
+                System.out.println("Невозможно добавить объект.");
             }
         }
     }
 }
-
-
-
-
-

@@ -60,20 +60,21 @@ public class App {
         System.out.println("\n Демонстрация и тестирование изменений по д/з - ООП: полиморфизм, интерфейсы \n");
 
         //создаю объект SearchEngine
-        SearchEngine elements = new SearchEngine();
+        SearchEngine elements = new SearchEngine(10);
 
         //добавляю товары из продуктовой корзины
         elements.addElements(product2);
         elements.addElements(product2);
-        elements.addElements(product6);
-        elements.addElements(product6);
-        elements.addElements(product6);
+        elements.addElements(product2);
+        elements.addElements(product2);
+        elements.addElements(product2);
+
         System.out.println(Arrays.toString(elements.getElements()));
 
         //создаю несколько объектов типа Article и добавляю их в массив SearchEngine
         Article article1 = new Article("Хлеб", "хлеб темный Дарницкий");
         Article article2 = new Article("Чай", "чай чорный Цейлонский");
-        Article article3= new Article("Сыр","сыр Голландский полутвёрдый");
+        Article article3 = new Article("Сыр", "сыр Голландский полутвёрдый");
 
         elements.addElements(article1);
         elements.addElements(article1);
@@ -81,17 +82,12 @@ public class App {
         elements.addElements(article2);
         elements.addElements(article3);
         elements.addElements(article3);
+
         System.out.println(Arrays.toString(elements.getElements()));
 
         //проверяю функциональность поиска
         elements.searchMatches("хлеб");
         elements.searchMatches("ЧАЙ");
-        elements.searchMatches("сыр");
         elements.searchMatches("зефир");
-
-
-
-
-
     }
 }
