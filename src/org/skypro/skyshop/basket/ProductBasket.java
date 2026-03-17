@@ -16,6 +16,7 @@ public class ProductBasket {
 
     //Метод добавления продукта в корзину: метод принимает в себя продукт и ничего не возвращает.
     public void addToBasket(Product product) {
+
         int size = 0;
         for (int i = 0; i < basket.length; i++) {
             if (basket[i] != null) {
