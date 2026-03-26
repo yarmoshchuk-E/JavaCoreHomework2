@@ -1,10 +1,9 @@
 package org.skypro.skyshop;
 
+import org.skypro.skyshop.articles.Article;
 import org.skypro.skyshop.basket.ProductBasket;
-import org.skypro.skyshop.product.DiscountedProduct;
-import org.skypro.skyshop.product.FixPriceProduct;
-import org.skypro.skyshop.product.Product;
-import org.skypro.skyshop.product.SimpleProduct;
+import org.skypro.skyshop.basket.SearchEngine;
+import org.skypro.skyshop.product.*;
 
 import java.util.Arrays;
 
@@ -57,5 +56,38 @@ public class App {
         basket1.checkingTheContent("мясо");
 
         System.out.println(Arrays.toString(basket1.getBasket()));
+
+        System.out.println("\n Демонстрация и тестирование изменений по д/з - ООП: полиморфизм, интерфейсы \n");
+
+        //создаю объект SearchEngine
+        SearchEngine elements = new SearchEngine(10);
+
+        //добавляю товары из продуктовой корзины
+        elements.addElements(product2);
+        elements.addElements(product2);
+        elements.addElements(product2);
+        elements.addElements(product2);
+        elements.addElements(product2);
+
+        System.out.println(Arrays.toString(elements.getElements()));
+
+        //создаю несколько объектов типа Article и добавляю их в массив SearchEngine
+        Article article1 = new Article("Хлеб", "хлеб темный Дарницкий");
+        Article article2 = new Article("Чай", "чай чорный Цейлонский");
+        Article article3 = new Article("Сыр", "сыр Голландский полутвёрдый");
+
+        elements.addElements(article1);
+        elements.addElements(article1);
+        elements.addElements(article1);
+        elements.addElements(article2);
+        elements.addElements(article3);
+        elements.addElements(article3);
+
+        System.out.println(Arrays.toString(elements.getElements()));
+
+        //проверяю функциональность поиска
+        elements.searchMatches("хлеб");
+        elements.searchMatches("ЧАЙ");
+        elements.searchMatches("зефир");
     }
 }
