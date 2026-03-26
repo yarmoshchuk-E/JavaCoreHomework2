@@ -5,6 +5,9 @@ public abstract class Product implements Searchable {
     private final String productName;
 
     public Product(String productName) {
+        if (productName == null || productName.isBlank()) {
+
+        }
         this.productName = productName;
 
     }
