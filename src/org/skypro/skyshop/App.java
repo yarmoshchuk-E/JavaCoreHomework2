@@ -1,6 +1,7 @@
 package org.skypro.skyshop;
 
 import org.skypro.skyshop.articles.Article;
+import org.skypro.skyshop.basket.BestResultNotFound;
 import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.basket.SearchEngine;
 import org.skypro.skyshop.product.*;
@@ -8,7 +9,7 @@ import org.skypro.skyshop.product.*;
 import java.util.Arrays;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws BestResultNotFound {
 
         //создаю новую корзину.
         ProductBasket basket1 = new ProductBasket();
@@ -89,5 +90,31 @@ public class App {
         elements.searchMatches("хлеб");
         elements.searchMatches("ЧАЙ");
         elements.searchMatches("зефир");
+
+
+        System.out.println("\n Демонстрация и тестирование изменений по д/з - Исключения в Java \n");
+
+        //создаю продукты с неверно заполненными полями и обрабатываю их в try-catch
+
+        try {
+            Product product7 = new SimpleProduct("хлеб", -50);
+        } catch (IllegalArgumentException e) {
+            System.out.println("ошибка создания продукта :" + e.getMessage());
+        }
+        try {
+            Product product8 = new FixPriceProduct(null);
+        } catch (IllegalArgumentException e) {
+            System.out.println("ошибка создания продукта :" + e.getMessage());
+        }
+        try {
+            Product product9 = new DiscountedProduct("сыр", 400, 115);
+        } catch (IllegalArgumentException e) {
+            System.out.println("ошибка создания продукта :" + e.getMessage());
+        }
+
+        // проверяю работу поискового метода
+        elements.findBestResult("хлеб");
+        elements.findBestResult("колбаса");
+
     }
 }

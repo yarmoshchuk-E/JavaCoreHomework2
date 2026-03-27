@@ -53,8 +53,44 @@ public class SearchEngine {
                 break;
             }
             if (count == elements.length) {
-                System.out.println("Невозможно добавить объект.");
+                System.out.println("Невозможно добавить объект: " + searchable.getSearchTerm());
             }
         }
+    }
+
+    public Searchable findBestResult(String search) throws BestResultNotFound {
+        Searchable bestResult = null;
+        int maxCount = 0;
+        for (int i = 0; i < elements.length; i++) {
+            if (!search.isEmpty() && elements[i] != null) {
+                String searchFor = elements[i].getSearchTerm().toLowerCase();
+                String searchIn = search.toLowerCase();
+                int count = countSearchContains(searchIn, searchFor);
+                if (count > maxCount) {
+                    maxCount = count;
+                    bestResult = elements[i];
+                }
+            }
+        }
+        if (maxCount <= 0) {
+            throw new BestResultNotFound(search);
+        }
+        System.out.println(bestResult);
+        return bestResult;
+    }
+
+    public int countSearchContains(String searchIn, String searchFor) {
+
+        String str = searchFor;
+        String substring = searchIn;
+        int count = 0;
+        int index = 0;
+        int subIndex = str.indexOf(substring, index);
+        while (subIndex != -1) {
+            count++;
+            index = subIndex + substring.length();
+            subIndex = str.indexOf(substring, index);
+        }
+        return count;
     }
 }
