@@ -29,9 +29,6 @@ public class App {
         basket1.addToBasket(product4);
         basket1.addToBasket(product5);
 
-        //Добавление продукта в заполненную корзину, в которой нет свободного места.
-        basket1.addToBasket(product6);
-
         //Печать содержимого корзины с несколькими товарами.
         basket1.printBasket();
 
