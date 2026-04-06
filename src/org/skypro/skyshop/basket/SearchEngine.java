@@ -2,73 +2,60 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Searchable;
 
-import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class SearchEngine {
-    private Searchable[] elements;
+    private final List<Searchable> elements;
 
-    public SearchEngine(int size) {
-        this.elements = new Searchable[size];
+    public SearchEngine(List<Searchable> elements) {
+        this.elements = elements;
     }
 
-    public Searchable[] getElements() {
+    public List<Searchable> getElements() {
         return elements;
     }
 
-    public Searchable[] searchMatches(String query) {
-        Searchable[] result = new Searchable[5];
+    public void addElements(Searchable searchable) {
+        elements.add(searchable);
+    }
+
+
+    public List<Searchable> searchMatches(String query) {
+        List<Searchable> result = new LinkedList<>();
+
+        Iterator<Searchable> el = elements.iterator();
+
+        query = query.toLowerCase();
+        query = query.replace(" ", "");
         int count = 0;
-        for (int i = 0; i < elements.length; i++) {
+        while (el.hasNext()) {
+            Searchable item = el.next();
 
-            query = query.toLowerCase();
-            query = query.replace(" ", "");
-
-            if (elements[i] == null) {
-                continue;
-            }
-            if (elements[i].getSearchTerm().contains(query)) {
-                result[count] = elements[i];
-                System.out.println(result[count]);
+            if (item.getSearchTerm().contains(query)) {
+                result.add(item);
                 count++;
-                if (count == result.length) {
-                    break;
-                }
             }
         }
         if (count == 0) {
             System.out.println("не найдено объектов, соответствующих запросу");
         }
-        System.out.println(Arrays.toString(result));
+        System.out.println(result);
         return result;
-    }
-
-    public void addElements(Searchable searchable) {
-        int count = 0;
-        for (int i = 0; i < elements.length; i++) {
-            if (elements[i] != null) {
-                count++;
-            }
-            if (elements[i] == null) {
-                elements[i] = searchable;
-                break;
-            }
-            if (count == elements.length) {
-                System.out.println("Невозможно добавить объект: " + searchable.getSearchTerm());
-            }
-        }
     }
 
     public Searchable findBestResult(String search) throws BestResultNotFound {
         Searchable bestResult = null;
         int maxCount = 0;
-        for (int i = 0; i < elements.length; i++) {
-            if (!search.isEmpty() && elements[i] != null) {
-                String searchFor = elements[i].getSearchTerm().toLowerCase();
+        for (int i = 0; i < elements.size(); i++) {
+            if (!search.isEmpty() && elements.get(i) != null) {
+                String searchFor = elements.get(i).getSearchTerm().toLowerCase();
                 String searchIn = search.toLowerCase();
                 int count = countSearchContains(searchIn, searchFor);
                 if (count > maxCount) {
                     maxCount = count;
-                    bestResult = elements[i];
+                    bestResult = elements.get(i);
                 }
             }
         }
