@@ -2,33 +2,28 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Product;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 public class ProductBasket {
 
-    private final Product[] basket;
+    private final List<Product> basket;
 
-    public ProductBasket() {
-        this.basket = new Product[5];
+    public ProductBasket(List<Product> basket) {
+        this.basket = basket;
     }
 
-    public Product[] getBasket() {
+    public List<Product> getBasket() {
         return basket;
     }
 
-    //Метод добавления продукта в корзину: метод принимает в себя продукт и ничего не возвращает.
-    public void addToBasket(Product product) {
-
-        int size = 0;
-        for (int i = 0; i < basket.length; i++) {
-            if (basket[i] != null) {
-                size++;
-            }
-            if (basket[i] == null) {
-                basket[i] = product;
-                break;
-            }
-            if (size == basket.length) {
-                System.out.println("Невозможно добавить продукт.");
-            }
+    //Метод очистки корзины: метод ничего не принимает и очищает массив, проставляя всем его элементам null.
+    public void cleanerBasket() {
+        Iterator<Product> del = basket.iterator();
+        while (del.hasNext()) {
+            del.next();
+            del.remove();
         }
     }
 
@@ -86,12 +81,27 @@ public class ProductBasket {
         return false;
     }
 
-    //Метод очистки корзины: метод ничего не принимает и очищает массив, проставляя всем его элементам null.
-    public void cleanerBasket() {
-        for (int i = 0; i < basket.length; i++) {
-            if (basket[i] != null) {
-                basket[i] = null;
+    public void addToBasket(Product product) {
+        basket.add(product);
+    }
+
+        //удаление продукта из корзины по имени с перемещением в отдельный список
+    public List<Product> deletingFromBasketByName(String deletingName) {
+        List<Product> deleted = new LinkedList<>();
+
+        Iterator<Product> delName = basket.iterator();
+
+        deletingName = deletingName.toLowerCase();
+        deletingName = deletingName.replace(" ", "");
+
+        while (delName.hasNext()) {
+            Product item = delName.next();
+
+            if (item.getSearchTerm().contains(deletingName)) {
+                deleted.add(item);
+                delName.remove();
             }
         }
+        return deleted;
     }
 }
