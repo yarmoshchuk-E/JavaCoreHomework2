@@ -169,5 +169,7 @@ public class App {
         //метод поиска возвращает все подходящие результаты (а не 5 результатов, как раньше)
         elements.searchMatches("хлеб");
 
+        System.out.println("\n Демонстрация и тестирование изменений по д/з - Java Collections Framework: Map \n");
+
     }
 }
