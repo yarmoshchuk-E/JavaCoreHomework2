@@ -6,6 +6,7 @@ import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.basket.SearchEngine;
 import org.skypro.skyshop.product.*;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class App {
     public static void main(String[] args) throws BestResultNotFound {
 
         //создаю новую корзину.
-        ProductBasket basket1 = new ProductBasket(new LinkedList<Product>());
+        ProductBasket basket1 = new ProductBasket(new HashMap<String, List<Product>>());
 
         //создаю продукты.
         Product product1 = new SimpleProduct("молоко", 100);
@@ -164,12 +165,13 @@ public class App {
         }
 
         //выводим содержимое корзины с помощью метода printBasket()
-        basket1.printBasket();
+       // basket1.printBasket();
 
         //метод поиска возвращает все подходящие результаты (а не 5 результатов, как раньше)
         elements.searchMatches("хлеб");
 
         System.out.println("\n Демонстрация и тестирование изменений по д/з - Java Collections Framework: Map \n");
+
 
     }
 }

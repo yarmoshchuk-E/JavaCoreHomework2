@@ -2,11 +2,10 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Searchable;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class SearchEngine {
+
     private final List<Searchable> elements;
 
     public SearchEngine(List<Searchable> elements) {
@@ -21,20 +20,19 @@ public class SearchEngine {
         elements.add(searchable);
     }
 
-
-    public List<Searchable> searchMatches(String query) {
-        List<Searchable> result = new LinkedList<>();
-
+    public Map<String, Searchable> searchMatches(String query) {
+        Map<String, Searchable> result = new TreeMap<>();
         Iterator<Searchable> el = elements.iterator();
-
         query = query.toLowerCase();
         query = query.replace(" ", "");
+
         int count = 0;
+
         while (el.hasNext()) {
             Searchable item = el.next();
 
             if (item.getSearchTerm().contains(query)) {
-                result.add(item);
+                result.put(query,item);
                 count++;
             }
         }
@@ -42,6 +40,7 @@ public class SearchEngine {
             System.out.println("не найдено объектов, соответствующих запросу");
         }
         System.out.println(result);
+
         return result;
     }
 
@@ -80,4 +79,5 @@ public class SearchEngine {
         }
         return count;
     }
+
 }
