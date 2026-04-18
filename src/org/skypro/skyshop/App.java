@@ -80,9 +80,9 @@ public class App {
         System.out.println(elements.getElements());
 
         //создаю несколько объектов типа Article и добавляю их в массив SearchEngine
-        Article article1 = new Article("Хлеб", "хлеб темный Дарницкий");
-        Article article2 = new Article("Чай", "чай чорный Цейлонский");
-        Article article3 = new Article("Сыр", "сыр Голландский полутвёрдый");
+        Article article1 = new Article("хлеб", "хлеб темный Дарницкий");
+        Article article2 = new Article("чай", "чай чорный Цейлонский");
+        Article article3 = new Article("сыр", "сыр Голландский полутвёрдый");
 
         elements.addElements(article1);
         elements.addElements(article1);
@@ -165,13 +165,38 @@ public class App {
         }
 
         //выводим содержимое корзины с помощью метода printBasket()
-       // basket1.printBasket();
+        // basket1.printBasket();
 
         //метод поиска возвращает все подходящие результаты (а не 5 результатов, как раньше)
         elements.searchMatches("хлеб");
 
         System.out.println("\n Демонстрация и тестирование изменений по д/з - Java Collections Framework: Map \n");
 
+//      создаю новый лист элементов поискового движка
+        SearchEngine elements2 = new SearchEngine(new LinkedList<Searchable>());
+
+        elements2.addElements(product1);
+        elements2.addElements(product2);
+        elements2.addElements(product3);
+        elements2.addElements(product4);
+        elements2.addElements(product5);
+        elements2.addElements(product6);
+
+//      для демонстрации корректного вывода поиска (сортировка результатов в алфавитном порядке) создаю несколько продуктов,
+//      которые содержат в себе строку запроса (query) в значении, но отличаются по ключу.
+
+        Article article4 = new Article("мякиш", "хлеб мягенький");
+        Article article5 = new Article("сухарик", "хлеб тверденький");
+
+        elements2.addElements(article1);
+        elements2.addElements(article2);
+        elements2.addElements(article3);
+        elements2.addElements(article4);
+        elements2.addElements(article5);
+
+        elements2.searchMatches("хлеб");
+
+        elements2.searchMatches("колбаса");
 
     }
 }

@@ -2,7 +2,10 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Searchable;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class SearchEngine {
 
@@ -22,29 +25,27 @@ public class SearchEngine {
 
     public Map<String, Searchable> searchMatches(String query) {
         Map<String, Searchable> result = new TreeMap<>();
-        Iterator<Searchable> el = elements.iterator();
+
         query = query.toLowerCase();
         query = query.replace(" ", "");
 
-        int count = 0;
+        Iterator<Searchable> el = elements.iterator();
 
         while (el.hasNext()) {
             Searchable item = el.next();
-
             if (item.getSearchTerm().contains(query)) {
-                result.put(query,item);
-                count++;
+                result.put(item.getSearchTerm(), item);
             }
         }
-        if (count == 0) {
+        if (result.isEmpty()) {
             System.out.println("не найдено объектов, соответствующих запросу");
         }
         System.out.println(result);
-
         return result;
     }
 
-    public Searchable findBestResult(String search) throws BestResultNotFound {
+
+    public void findBestResult(String search) throws BestResultNotFound {
         Searchable bestResult = null;
         int maxCount = 0;
         for (int i = 0; i < elements.size(); i++) {
@@ -62,7 +63,6 @@ public class SearchEngine {
             throw new BestResultNotFound(search);
         }
         System.out.println(bestResult);
-        return bestResult;
     }
 
     public int countSearchContains(String searchIn, String searchFor) {
@@ -79,5 +79,4 @@ public class SearchEngine {
         }
         return count;
     }
-
 }
