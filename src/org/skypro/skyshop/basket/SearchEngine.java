@@ -3,10 +3,12 @@ package org.skypro.skyshop.basket;
 import org.skypro.skyshop.product.Searchable;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class SearchEngine {
+
     private final List<Searchable> elements;
 
     public SearchEngine(List<Searchable> elements) {
@@ -21,31 +23,29 @@ public class SearchEngine {
         elements.add(searchable);
     }
 
-
-    public List<Searchable> searchMatches(String query) {
-        List<Searchable> result = new LinkedList<>();
-
-        Iterator<Searchable> el = elements.iterator();
+    public Map<String, Searchable> searchMatches(String query) {
+        Map<String, Searchable> result = new TreeMap<>();
 
         query = query.toLowerCase();
         query = query.replace(" ", "");
-        int count = 0;
+
+        Iterator<Searchable> el = elements.iterator();
+
         while (el.hasNext()) {
             Searchable item = el.next();
-
             if (item.getSearchTerm().contains(query)) {
-                result.add(item);
-                count++;
+                result.put(item.getSearchTerm(), item);
             }
         }
-        if (count == 0) {
+        if (result.isEmpty()) {
             System.out.println("не найдено объектов, соответствующих запросу");
         }
         System.out.println(result);
         return result;
     }
 
-    public Searchable findBestResult(String search) throws BestResultNotFound {
+
+    public void findBestResult(String search) throws BestResultNotFound {
         Searchable bestResult = null;
         int maxCount = 0;
         for (int i = 0; i < elements.size(); i++) {
@@ -63,7 +63,6 @@ public class SearchEngine {
             throw new BestResultNotFound(search);
         }
         System.out.println(bestResult);
-        return bestResult;
     }
 
     public int countSearchContains(String searchIn, String searchFor) {

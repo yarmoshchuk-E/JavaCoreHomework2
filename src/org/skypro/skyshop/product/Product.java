@@ -21,6 +21,6 @@ public abstract class Product implements Searchable {
 
     @Override
     public String toString() {
-        return "<" + getProductName() + ": " + getProductPrice() + ">";
+        return "\n"+ "<" + getProductName() + ": " + getProductPrice() + ">";
     }
 }
