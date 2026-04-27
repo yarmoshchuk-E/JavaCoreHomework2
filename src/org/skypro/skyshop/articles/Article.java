@@ -22,6 +22,10 @@ public class Article implements Searchable {
     }
 
     @Override
+    public String getName() {
+        return getArticleTitle();
+    }
+    @Override
     public String toString() {
         return "\n"+ getArticleTitle() + "- " + getTextOfTheArticle();
     }
