@@ -2,22 +2,16 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Searchable;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class SearchEngine {
 
-    private final List<Searchable> elements;
+    private final Set<Searchable> elements;
 
-    public SearchEngine(List<Searchable> elements) {
-        this.elements = elements;
+    public SearchEngine() {
+        this.elements = new HashSet<>();
     }
 
-    public List<Searchable> getElements() {
-        return elements;
-    }
 
     public void addElements(Searchable searchable) {
         elements.add(searchable);
