@@ -11,5 +11,4 @@ public interface Searchable {
     default String getStringRepresentation() {
         return getSearchTerm() + getTypeOfContent();
     }
-
 }

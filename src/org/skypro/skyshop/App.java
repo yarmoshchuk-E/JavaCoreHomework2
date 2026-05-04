@@ -4,10 +4,7 @@ import org.skypro.skyshop.articles.Article;
 import org.skypro.skyshop.basket.BestResultNotFound;
 import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.basket.SearchEngine;
-import org.skypro.skyshop.product.DiscountedProduct;
-import org.skypro.skyshop.product.FixPriceProduct;
-import org.skypro.skyshop.product.Product;
-import org.skypro.skyshop.product.SimpleProduct;
+import org.skypro.skyshop.product.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -70,38 +67,42 @@ public class App {
         System.out.println("\n Демонстрация и тестирование изменений по д/з - ООП: полиморфизм, интерфейсы \n");
 
         //создаю объект SearchEngine
-        SearchEngine elements = new SearchEngine();
+        SearchEngine elements1 = new SearchEngine();
+
+        System.out.println(elements1);
 
         //добавляю товары из продуктовой корзины
-        elements.addElements(product2);
-        elements.addElements(product2);
-        elements.addElements(product2);
-        elements.addElements(product2);
-        elements.addElements(product2);
+        elements1.addElements(product2);
+        elements1.addElements(product2);
+        elements1.addElements(product2);
+        elements1.addElements(product2);
+        elements1.addElements(product2);
 
-        System.out.println(elements);
+
+
+        System.out.println(elements1);
 
         //создаю несколько объектов типа Article и добавляю их в массив SearchEngine
         Article article1 = new Article("хлеб", "хлеб темный Дарницкий");
         Article article2 = new Article("чай", "чай чорный Цейлонский");
         Article article3 = new Article("сыр", "сыр Голландский полутвёрдый");
 
-        elements.addElements(article1);
-        elements.addElements(article1);
-        elements.addElements(article1);
-        elements.addElements(article2);
-        elements.addElements(article3);
-        elements.addElements(article3);
+        elements1.addElements(article1);
+        elements1.addElements(article1);
+        elements1.addElements(article1);
+        elements1.addElements(article2);
+        elements1.addElements(article3);
+        elements1.addElements(article3);
 
-        System.out.println(elements);
+        System.out.println(elements1);
 
         //проверяю функциональность поиска
         System.out.println();
-        elements.searchMatches("хлеб");
+        elements1.searchMatches("хлеб");
+       System.out.println();
+        elements1.searchMatches("СЫР");
         System.out.println();
-        elements.searchMatches("СЫР");
-        System.out.println();
-        elements.searchMatches("зефир");
+        elements1.searchMatches("зефир");
 
 
         System.out.println("\n Демонстрация и тестирование изменений по д/з - Исключения в Java \n");
@@ -125,7 +126,7 @@ public class App {
         }
 
         // проверяю работу поискового метода
-        elements.findBestResult("хлеб");
+        elements1.findBestResult("хлеб");
         //elements.findBestResult("колбаса");
 
         System.out.println("\n Демонстрация и тестирование изменений по д/з - Java Collections Framework: List \n");
@@ -170,7 +171,7 @@ public class App {
         // basket1.printBasket();
 
         //метод поиска возвращает все подходящие результаты (а не 5 результатов, как раньше)
-        elements.searchMatches("хлеб");
+        elements1.searchMatches("хлеб");
 
         System.out.println("\n Демонстрация и тестирование изменений по д/з - Java Collections Framework: Map \n");
 
