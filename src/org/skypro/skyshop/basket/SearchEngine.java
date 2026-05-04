@@ -3,6 +3,7 @@ package org.skypro.skyshop.basket;
 import org.skypro.skyshop.product.Searchable;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -84,4 +85,19 @@ public class SearchEngine {
         }
         return count;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[ ");
+        Iterator<Searchable> iterator = elements.iterator();
+        while (iterator.hasNext()) {
+            sb.append(iterator.next().toString()).append(", ");
+        }
+        if (sb.length() > 2) {
+            sb.setLength(sb.length() - 2); // Убираем последнюю запятую и пробел
+        }
+        sb.append(" ]");
+        return sb.toString();
+    }
+
 }

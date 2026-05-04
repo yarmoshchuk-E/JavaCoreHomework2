@@ -69,16 +69,12 @@ public class App {
         //создаю объект SearchEngine
         SearchEngine elements1 = new SearchEngine();
 
-        System.out.println(elements1);
-
         //добавляю товары из продуктовой корзины
         elements1.addElements(product2);
         elements1.addElements(product2);
         elements1.addElements(product2);
         elements1.addElements(product2);
         elements1.addElements(product2);
-
-
 
         System.out.println(elements1);
 
@@ -201,7 +197,7 @@ public class App {
 
         elements2.searchMatches("хлеб");
 
-
+        System.out.println(elements2);
 
     }
 }
