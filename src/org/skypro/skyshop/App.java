@@ -4,10 +4,12 @@ import org.skypro.skyshop.articles.Article;
 import org.skypro.skyshop.basket.BestResultNotFound;
 import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.basket.SearchEngine;
-import org.skypro.skyshop.product.*;
+import org.skypro.skyshop.product.DiscountedProduct;
+import org.skypro.skyshop.product.FixPriceProduct;
+import org.skypro.skyshop.product.Product;
+import org.skypro.skyshop.product.SimpleProduct;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 public class App {
@@ -68,7 +70,7 @@ public class App {
         System.out.println("\n Демонстрация и тестирование изменений по д/з - ООП: полиморфизм, интерфейсы \n");
 
         //создаю объект SearchEngine
-        SearchEngine elements = new SearchEngine(new LinkedList<Searchable>());
+        SearchEngine elements = new SearchEngine();
 
         //добавляю товары из продуктовой корзины
         elements.addElements(product2);
@@ -77,7 +79,7 @@ public class App {
         elements.addElements(product2);
         elements.addElements(product2);
 
-        System.out.println(elements.getElements());
+        System.out.println(elements);
 
         //создаю несколько объектов типа Article и добавляю их в массив SearchEngine
         Article article1 = new Article("хлеб", "хлеб темный Дарницкий");
@@ -91,7 +93,7 @@ public class App {
         elements.addElements(article3);
         elements.addElements(article3);
 
-        System.out.println(elements.getElements());
+        System.out.println(elements);
 
         //проверяю функциональность поиска
         System.out.println();
@@ -173,7 +175,7 @@ public class App {
         System.out.println("\n Демонстрация и тестирование изменений по д/з - Java Collections Framework: Map \n");
 
 //      создаю новый лист элементов поискового движка
-        SearchEngine elements2 = new SearchEngine(new LinkedList<Searchable>());
+        SearchEngine elements2 = new SearchEngine();
 
         elements2.addElements(product1);
         elements2.addElements(product2);
@@ -194,9 +196,11 @@ public class App {
         elements2.addElements(article4);
         elements2.addElements(article5);
 
+        System.out.println("\n Демонстрация и тестирование изменений по д/з - Java Collections Framework: Set \n");
+
         elements2.searchMatches("хлеб");
 
-        elements2.searchMatches("колбаса");
+
 
     }
 }

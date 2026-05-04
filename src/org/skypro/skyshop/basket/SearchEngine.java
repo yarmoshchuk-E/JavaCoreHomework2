@@ -2,39 +2,30 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Searchable;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class SearchEngine {
 
-    private final List<Searchable> elements;
+    private final Set<Searchable> elements;
 
-    public SearchEngine(List<Searchable> elements) {
-        this.elements = elements;
+    public SearchEngine() {
+        this.elements = new HashSet<>();
     }
 
-    public List<Searchable> getElements() {
-        return elements;
-    }
 
     public void addElements(Searchable searchable) {
         elements.add(searchable);
     }
 
-    public Map<String, Searchable> searchMatches(String query) {
-        Map<String, Searchable> result = new TreeMap<>();
+    public Set<Searchable> searchMatches(String query) {
+        Set<Searchable> result = new TreeSet<>( new SearchableComparator() );
 
         query = query.toLowerCase();
         query = query.replace(" ", "");
 
-        Iterator<Searchable> el = elements.iterator();
-
-        while (el.hasNext()) {
-            Searchable item = el.next();
-            if (item.getSearchTerm().contains(query)) {
-                result.put(item.getSearchTerm(), item);
+        for (Searchable searchable : elements) {
+            if (searchable.getSearchTerm().contains(query)) {
+                result.add(searchable);
             }
         }
         if (result.isEmpty()) {
@@ -45,24 +36,25 @@ public class SearchEngine {
     }
 
 
-    public void findBestResult(String search) throws BestResultNotFound {
+    public Searchable findBestResult (String search) throws BestResultNotFound {
         Searchable bestResult = null;
         int maxCount = 0;
-        for (int i = 0; i < elements.size(); i++) {
-            if (!search.isEmpty() && elements.get(i) != null) {
-                String searchFor = elements.get(i).getSearchTerm().toLowerCase();
+        for (Searchable searchable: elements) {
+            if (searchable != null) {
+                String searchFor = searchable.getSearchTerm().toLowerCase();
                 String searchIn = search.toLowerCase();
                 int count = countSearchContains(searchIn, searchFor);
                 if (count > maxCount) {
                     maxCount = count;
-                    bestResult = elements.get(i);
+                    bestResult = searchable;
                 }
             }
         }
-        if (maxCount <= 0) {
+        if (bestResult==null) {
             throw new BestResultNotFound(search);
         }
         System.out.println(bestResult);
+        return bestResult;
     }
 
     public int countSearchContains(String searchIn, String searchFor) {
