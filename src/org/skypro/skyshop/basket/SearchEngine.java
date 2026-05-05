@@ -17,19 +17,17 @@ public class SearchEngine {
     }
 
 
-
     public void addElements(Searchable searchable) {
         elements.add(searchable);
 
     }
 
 
-
     public Set<Searchable> searchMatches(String query) {
 
-                 Set<Searchable> result = elements.stream()
-                .filter(e -> e!=null && e.getSearchTerm().toLowerCase().contains(query.toLowerCase()))
-                .collect (Collectors.toCollection(() -> new TreeSet<>  (new SearchableComparator())));
+        Set<Searchable> result = elements.stream()
+                .filter(e -> e != null && e.getSearchTerm().toLowerCase().contains(query.toLowerCase()))
+                .collect(Collectors.toCollection(() -> new TreeSet<>(new SearchableComparator())));
 
         System.out.println(result);
         return result;
@@ -50,10 +48,10 @@ public class SearchEngine {
 //    }
 
 
-    public Searchable findBestResult (String search) throws BestResultNotFound {
+    public Searchable findBestResult(String search) throws BestResultNotFound {
         Searchable bestResult = null;
         int maxCount = 0;
-        for (Searchable searchable: elements) {
+        for (Searchable searchable : elements) {
             if (searchable != null) {
                 String searchFor = searchable.getSearchTerm().toLowerCase();
                 String searchIn = search.toLowerCase();
@@ -64,7 +62,7 @@ public class SearchEngine {
                 }
             }
         }
-        if (bestResult==null) {
+        if (bestResult == null) {
             throw new BestResultNotFound(search);
         }
         System.out.println(bestResult);
