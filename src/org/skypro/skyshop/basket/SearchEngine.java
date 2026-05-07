@@ -2,7 +2,11 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Searchable;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class SearchEngine {
 
@@ -15,31 +19,39 @@ public class SearchEngine {
 
     public void addElements(Searchable searchable) {
         elements.add(searchable);
+
     }
+
 
     public Set<Searchable> searchMatches(String query) {
-        Set<Searchable> result = new TreeSet<>( new SearchableComparator() );
 
-        query = query.toLowerCase();
-        query = query.replace(" ", "");
+        Set<Searchable> result = elements.stream()
+                .filter(e -> e != null && e.getSearchTerm().toLowerCase().contains(query.toLowerCase()))
+                .collect(Collectors.toCollection(() -> new TreeSet<>(new SearchableComparator())));
 
-        for (Searchable searchable : elements) {
-            if (searchable.getSearchTerm().contains(query)) {
-                result.add(searchable);
-            }
-        }
-        if (result.isEmpty()) {
-            System.out.println("не найдено объектов, соответствующих запросу");
-        }
         System.out.println(result);
         return result;
+
     }
 
 
-    public Searchable findBestResult (String search) throws BestResultNotFound {
+//        for (Searchable searchable : elements) {
+//            if (searchable.getSearchTerm().contains(query)) {
+//                result.add(searchable);
+//            }
+//        }
+//        if (result.isEmpty()) {
+//            System.out.println("не найдено объектов, соответствующих запросу");
+//        }
+//        System.out.println(result);
+//        return result;
+//    }
+
+
+    public Searchable findBestResult(String search) throws BestResultNotFound {
         Searchable bestResult = null;
         int maxCount = 0;
-        for (Searchable searchable: elements) {
+        for (Searchable searchable : elements) {
             if (searchable != null) {
                 String searchFor = searchable.getSearchTerm().toLowerCase();
                 String searchIn = search.toLowerCase();
@@ -50,7 +62,7 @@ public class SearchEngine {
                 }
             }
         }
-        if (bestResult==null) {
+        if (bestResult == null) {
             throw new BestResultNotFound(search);
         }
         System.out.println(bestResult);
@@ -71,4 +83,19 @@ public class SearchEngine {
         }
         return count;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[ ");
+        Iterator<Searchable> iterator = elements.iterator();
+        while (iterator.hasNext()) {
+            sb.append(iterator.next().toString()).append(", ");
+        }
+        if (sb.length() > 2) {
+            sb.setLength(sb.length() - 2); // Убираем последнюю запятую и пробел
+        }
+        sb.append(" ]");
+        return sb.toString();
+    }
+
 }

@@ -47,8 +47,7 @@ public class Article implements Searchable {
         Article article = (Article) o;
         return Objects.equals(articleTitle, article.articleTitle);
     }
-
-    @Override
+       @Override
     public int hashCode() {
         return Objects.hashCode(articleTitle);
     }
